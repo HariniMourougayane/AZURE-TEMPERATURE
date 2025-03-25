@@ -1,0 +1,38 @@
+function convertTemperature() {
+    const tempInput = document.getElementById("temp-input").value;
+    const fromUnit = document.getElementById("from-unit").value;
+    const toUnit = document.getElementById("to-unit").value;
+    let result = 0;
+
+    if (tempInput === "") {
+        alert("Please enter a temperature.");
+        return;
+    }
+
+    const temp = parseFloat(tempInput);
+
+    if (fromUnit === toUnit) {
+        result = temp;  // No conversion needed
+    } else if (fromUnit === "Celsius") {
+        if (toUnit === "Fahrenheit") {
+            result = (temp * 9/5) + 32; // Celsius to Fahrenheit
+        } else if (toUnit === "Kelvin") {
+            result = temp + 273.15; // Celsius to Kelvin
+        }
+    } else if (fromUnit === "Fahrenheit") {
+        if (toUnit === "Celsius") {
+            result = (temp - 32) * 5/9; // Fahrenheit to Celsius
+        } else if (toUnit === "Kelvin") {
+            result = (temp - 32) * 5/9 + 273.15; // Fahrenheit to Kelvin
+        }
+    } else if (fromUnit === "Kelvin") {
+        if (toUnit === "Celsius") {
+            result = temp - 273.15; // Kelvin to Celsius
+        } else if (toUnit === "Fahrenheit") {
+            result = (temp - 273.15) * 9/5 + 32; // Kelvin to Fahrenheit
+        }
+    }
+
+    // Round the result to two decimal places
+    document.getElementById("converted-temp").textContent = result.toFixed(2);
+}
